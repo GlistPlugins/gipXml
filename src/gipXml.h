@@ -18,12 +18,12 @@ public:
 	/*
 	 * Loads the XML from fullpath.
 	 */
-	XMLError load(std::string fullpath);
+	bool load(std::string fullpath);
 
 	/*
 	 * Loads the XML from file path.
 	 */
-	int loadXml(std::string xmlpath);
+	bool loadXml(std::string xmlpath);
 
 	/*
 	 * Parsing for string that contains XML.
@@ -33,22 +33,22 @@ public:
 	/*
 	 * Gets the root node by calling FirstChild function of XMLDocument. It will return a pointer to the XMLNode class.
 	 */
-	XMLNode* getRootNode();
+	std::string getRootNode();
 
 	/*
 	 * Iterates the nodes by calling NextSibling() function of XMLNode.
 	 */
-	XMLNode* getSiblingNode();
+	std::string getSiblingNode();
 
 	/*
 	 * Gets the child level nodes of the current node by calling FirstChild() function of XMLNode.
 	 */
-	XMLNode* getChildNode();
+	std::string getChildNode();
 
 	/*
 	 *Gets data from node by using XML Node class ToElement() function.
 	 */
-	XMLElement* getChildElement();
+	std::string getChildElement();
 
 	/*
 	 * Gets the Tag name of the Node using Name() function of XMLElement class.
