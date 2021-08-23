@@ -13,6 +13,8 @@ set(PREBUILT_DIR ${PLUGIN_DIR}/prebuilts)
 list(APPEND PLUGIN_SRCS
 			${PLUGIN_DIR}/src/gipXml.cpp
 			${PLUGIN_DIR}/xml/src/tinyxml2.cpp
+			${PLUGIN_DIR}/src/gipXMLNode.cpp
+			${PLUGIN_DIR}/src/gipXMLElement.cpp
 )
 
 

@@ -10,6 +10,8 @@
 
 #include "gBasePlugin.h"
 #include "tinyxml2.h"
+#include "gipXMLNode.h"
+#include "gipXMLElement.h"
 using namespace tinyxml2;
 
 class gipXml : public gBasePlugin{
@@ -72,6 +74,8 @@ private:
 	XMLNode *rootnode, *SiblingNode, *ChildNode;
 	XMLElement *ChildElement;
 	const char *strTagName, *strAttribute;
+	gipXMLNode xmlNode;
+	gipXMLElement xmlElement;
 };
 
 #endif /* SRC_GIPEMPTY_H_ */
