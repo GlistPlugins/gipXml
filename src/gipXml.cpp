@@ -15,9 +15,15 @@ bool gipXml::load(std::string _fullPath) {
 	fpath = new char[fullpath.size() + 1];
 	std::strcpy(fpath, fullpath.c_str());
 
-	int ret = (int)xmlDoc.LoadFile(fpath);
-
-	return ret == (int)XMLError::XML_SUCCESS;
+	XMLError error = xmlDoc.LoadFile(fpath);
+	if(error != 0) {
+		if(error == 3) gLogi("gipXml") << "Dosya bulunamadi ";
+		return false;
+	}
+	rootnode = new gipXmlNode();
+	if(xmlDoc.FirstChild())
+		rootnode->setNode(xmlDoc.FirstChild());
+	return true;
 }
 
 bool gipXml::loadXml(std::string xmlpath) {
@@ -43,33 +49,19 @@ void gipXml::parseXml() {
 	xmlDoc.Parse(fpath);
 }
 
-std::string gipXml::getRootNode() {
-
-	return std::string(xmlNode._rootNode()->Value());
+gipXmlNode* gipXml::getRootNode() {
+	return rootnode;
 }
 
-std::string gipXml::getSiblingNode() {
-
-	return std::string(xmlNode._SiblingNode()->Value());
+gipXmlNode* gipXml::getSiblingNode(gipXmlNode* xmlNode) {
+	return xmlNode->getSiblingNode();
 }
 
-std::string gipXml::getChildNode() {
-
-	return std::string(xmlNode._ChildNode()->Value());
+gipXmlNode* gipXml::getChildNode(gipXmlNode* xmlNode) {
+	return xmlNode->getChildNode();
 }
 
-std::string gipXml::getChildElement() {
-
-	return std::string(xmlElement._ChildElement()->Value());
-}
-
-std::string gipXml::getTagName() {
-
-	return xmlElement._TagName();
-}
-
-std::string gipXml::getAttribute(std::string attributeName) {
-
-	return xmlElement._Attribute(attributeName);
+std::string gipXml::getAttribute(gipXmlNode* xmlNode, std::string attributeName) {
+	return xmlNode->getAttribute(attributeName);
 
 }

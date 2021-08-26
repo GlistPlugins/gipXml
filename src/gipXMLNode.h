@@ -1,29 +1,34 @@
 /*
- * gipXMLNode.h
+ * gipXmlNode.h
  *
- *  Created on: 23 Aðu 2021
- *      Author: ROG_D
+ *  Created on: 24 Aug 2021
+ *      Author: Selcuk
  */
 
 #ifndef SRC_GIPXMLNODE_H_
 #define SRC_GIPXMLNODE_H_
 
+#include "gBasePlugin.h"
 #include "tinyxml2.h"
+
 using namespace tinyxml2;
 
-class gipXMLNode {
-
-
+class gipXmlNode: public gBasePlugin {
 public:
+	gipXmlNode();
+	virtual ~gipXmlNode();
 
-	XMLNode* _rootNode();
-	XMLNode* _SiblingNode();
-	XMLNode* _ChildNode();
+	void setNode(XMLNode* outnode);
 
+	std::string getTag();
+	gipXmlNode* getSiblingNode();
+	gipXmlNode* getChildNode();
+	std::string getAttribute(std::string attribute);
 
 private:
-
-	XMLDocument xmlDoc;
-	XMLNode *rootnode, *SiblingNode, *ChildNode;
+	XMLNode* node;
+	XMLElement* element;
+	std::string tagname;
 };
+
 #endif /* SRC_GIPXMLNODE_H_ */
