@@ -5,22 +5,28 @@
  *      Author: Selçuk
  */
 
-#include <gipXml.h>
+#include "gipXml.h"
 
 
-XMLError gipXml::load(std::string _fullPath) {
+bool gipXml::load(std::string _fullPath) {
 	fullpath = _fullPath;
 	directory = getDirName(fullpath);
 	path = getFileName(fullpath);
 	fpath = new char[fullpath.size() + 1];
 	std::strcpy(fpath, fullpath.c_str());
 
-	xmlDoc.LoadFile(fpath);
-
-	return xmlDoc.LoadFile(fpath);
+	XMLError error = xmlDoc.LoadFile(fpath);
+	if(error != 0) {
+		if(error == 3) gLogi("gipXml") << "Dosya bulunamadi ";
+		return false;
+	}
+	rootnode = new gipXmlNode();
+	if(xmlDoc.FirstChild())
+		rootnode->setNode(xmlDoc.FirstChild());
+	return true;
 }
 
-int gipXml::loadXml(std::string xmlpath) {
+bool gipXml::loadXml(std::string xmlpath) {
 	return load(gGetFilesDir() + xmlpath);
 }
 
@@ -43,66 +49,19 @@ void gipXml::parseXml() {
 	xmlDoc.Parse(fpath);
 }
 
-XMLNode* gipXml::getRootNode() {
-
-	XMLNode *rootnode = xmlDoc.FirstChild();
-
+gipXmlNode* gipXml::getRootNode() {
 	return rootnode;
 }
 
-XMLNode* gipXml::getSiblingNode() {
-
-	XMLNode *rootnode = xmlDoc.FirstChild();
-	XMLNode *SiblingNode = rootnode ->NextSibling();
-
-	return SiblingNode;
+gipXmlNode* gipXml::getSiblingNode(gipXmlNode* xmlNode) {
+	return xmlNode->getSiblingNode();
 }
 
-XMLNode* gipXml::getChildNode() {
-
-	XMLNode *rootnode = xmlDoc.FirstChild();
-	XMLNode *SiblingNode = rootnode ->NextSibling();
-	XMLNode *ChildNode = SiblingNode ->FirstChild();
-
-	std::string strChildName = ChildElement ->Name();
-
-	return ChildNode;
+gipXmlNode* gipXml::getChildNode(gipXmlNode* xmlNode) {
+	return xmlNode->getChildNode();
 }
 
-XMLElement* gipXml::getChildElement() {
-
-	XMLNode *rootnode = xmlDoc.FirstChild();
-	XMLNode *SiblingNode = rootnode ->NextSibling();
-	XMLNode *ChildNode = SiblingNode ->FirstChild();
-
-	XMLElement *ChildElement = ChildNode->ToElement();
-
-	return ChildElement;
-}
-
-std::string gipXml::getTagName() {
-
-	XMLNode *rootnode = xmlDoc.FirstChild();
-	XMLNode *SiblingNode = rootnode ->NextSibling();
-	XMLNode *ChildNode = SiblingNode ->FirstChild();
-
-	XMLElement *ChildElement = ChildNode->ToElement();
-
-	std::string strTagName = ChildElement ->Name();
-
-	return strTagName;
-}
-
-std::string gipXml::getAttribute(std::string attributeName) {
-
-	XMLNode *rootnode = xmlDoc.FirstChild();
-	XMLNode *SiblingNode = rootnode ->NextSibling();
-	XMLNode *ChildNode = SiblingNode ->FirstChild();
-
-	XMLElement *ChildElement = ChildNode->ToElement();
-
-	std::string strAttribute = ChildElement ->Attribute(attributeName.c_str());
-
-	return strAttribute;
+std::string gipXml::getAttribute(gipXmlNode* xmlNode, std::string attributeName) {
+	return xmlNode->getAttribute(attributeName);
 
 }
