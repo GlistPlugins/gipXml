@@ -36,30 +36,22 @@ public:
 	gipXmlNode* getRootNode();
 
 	/*
-	 * Iterates the nodes by calling NextSibling() function of XMLNode.
+	 * Iterates the node by calling NextSibling() function of XMLNode.
 	 */
 	gipXmlNode* getSiblingNode(gipXmlNode* xmlNode);
 
 	/*
-	 * Gets the child level nodes of the current node by calling FirstChild() function of XMLNode.
+	 * Gets the child level node of the current node by calling FirstChild() function of XMLNode.
 	 */
 	gipXmlNode* getChildNode(gipXmlNode* xmlNode);
 
 	/*
-	 *Gets data from node by using XML Node class ToElement() function.
-	 */
-	//Child Elemnt
-
-	/*
 	 * Gets the Tag name of the Node using Name() function of XMLElement class.
 	 */
-	//TAG NAME
+	std::string getTagName(gipXmlNode* xmlNode);
 
 	/*
 	 * Gets the values of the attributes of elements using the Attribute() function by giving the attribute name as parameter.
-	 *
-	 * Use it if your xml has attributes in it you can also use it to check if the xml file has attributes or not as well.
-	 *
 	 */
 	std::string getAttribute(gipXmlNode* xmlNode, std::string attributeName);
 

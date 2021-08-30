@@ -61,6 +61,10 @@ gipXmlNode* gipXml::getChildNode(gipXmlNode* xmlNode) {
 	return xmlNode->getChildNode();
 }
 
+std::string gipXml::getTagName(gipXmlNode* xmlNode) {
+	return xmlNode->getTag();
+}
+
 std::string gipXml::getAttribute(gipXmlNode* xmlNode, std::string attributeName) {
 	return xmlNode->getAttribute(attributeName);
 
