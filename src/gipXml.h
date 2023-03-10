@@ -1,18 +1,18 @@
 /*
  * gipXml.h
  *
- *  Created on: 4 Aðu 2021
- *      Author: Selçuk
+ *  Created on: 4 aug 2021
+ *      Author: SelÃ§uk
  */
 
 #ifndef SRC_GIPEMPTY_H_
 #define SRC_GIPEMPTY_H_
 
-#include "gBasePlugin.h"
+#include "gBaseComponent.h"
 #include "gipXmlNode.h"
 using namespace tinyxml2;
 
-class gipXml : public gBasePlugin{
+class gipXml : public gBaseComponent {
 public:
 
 	/*
