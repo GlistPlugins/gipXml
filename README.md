@@ -1,5 +1,5 @@
 # gipXml
-Xml plugin for [GlistEngine](https://github.com/GlistEngine/GlistEngine).
+Xml component for [GlistEngine](https://github.com/GlistEngine/GlistEngine).
 ### Requirements
 - [GlistEngine](https://github.com/GlistEngine/GlistEngine).
 - Any program that can read/write XML file type.
